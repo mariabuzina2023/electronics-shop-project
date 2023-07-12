@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
-import csv
+from src.item import Item, InstantiateCSVError
+import pytest
 
 
 
@@ -39,6 +39,14 @@ def test_repr():
 def test_str():
     example = Item("Смартфон", 10000, 20)
     assert example.__str__() == 'Смартфон'
+
+
+def test_instantiate_from_csv():
+    Item.file_csv = '../src/items.csv'
+    assert Item.instantiate_from_csv() == None
+    # Item.file_csv = '../src/items____.csv'
+    # with pytest.raises(InstantiateCSVError):
+    #     Item.instantiate_from_csv()
 
 
 
